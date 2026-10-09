@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rivas CF - Sistema Oficial de Estadísticas, Gestión de Plantilla y Fichas Técnicas.">
+  <title>Rivas CF | Gestión de Plantilla y Estadísticas Oficiales</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>">
+</head>
+<body>
+  <!-- Contenedor Principal de la Aplicación -->
+  <div class="app-container">
+
+    <!-- Overlay para móvil al abrir menú -->
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- Barra Lateral (Sidebar) -->
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <circle cx="12" cy="11" r="3"></circle>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <h2>Rivas <span>CF</span></h2>
+            <small>Club de Fútbol &bull; Oficial</small>
+          </div>
+        </div>
+        <button id="closeSidebarBtn" class="btn-icon mobile-only" aria-label="Cerrar menú">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <!-- Menú de Navegación -->
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <button class="nav-item active" data-tab="dashboard">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="9"></rect>
+                <rect x="14" y="3" width="7" height="5"></rect>
+                <rect x="14" y="12" width="7" height="9"></rect>
+                <rect x="3" y="16" width="7" height="5"></rect>
+              </svg>
+              <span>Dashboard Club</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-item" data-tab="players">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span>Plantilla Rivas CF</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-item" data-tab="profiles">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="16" rx="3"></rect>
+                <circle cx="9" cy="10" r="2.5"></circle>
+                <path d="M15 8h2"></path>
+                <path d="M15 12h2"></path>
+                <path d="M7 16c0-1.5 1.5-2.5 3-2.5h0c1.5 0 3 1 3 2.5"></path>
+              </svg>
+              <span>Fichas Técnicas</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-item" data-tab="matches">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m4.93 4.93 4.24 4.24"></path>
+                <path d="m14.83 9.17 4.24-4.24"></path>
+                <path d="m14.83 14.83 4.24 4.24"></path>
+                <path d="m9.17 14.83-4.24 4.24"></path>
+                <circle cx="12" cy="12" r="4"></circle>
+              </svg>
+              <span>Partidos del Club</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-item" data-tab="standings">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                <path d="M4 22h16"></path>
+                <path d="M10 14.66V17c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-2.34"></path>
+                <path d="M18 14.66V17c0 .55-.45 1-1 1h-2c-.55 0-1-.45-1-1v-2.34"></path>
+                <path d="M14 9V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v5"></path>
+                <path d="M18 9a6 6 0 0 1-12 0"></path>
+              </svg>
+              <span>Clasificación de Liga</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Pie de la Barra Lateral -->
+      <div class="sidebar-footer">
+        <div class="demo-tag">
+          <span class="pulse-dot"></span>
+          <span>Rivas CF &bull; Temporada 26/27</span>
+        </div>
+        <button id="resetDataBtn" class="btn btn-outline-danger btn-block">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <polyline points="23 20 23 14 17 14"></polyline>
+            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+          </svg>
+          Restablecer Plantilla
+        </button>
+      </div>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+      <!-- Encabezado Superior -->
+      <header class="top-header">
+        <div class="header-left">
+          <button id="openSidebarBtn" class="btn-icon mobile-only" aria-label="Abrir menú">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <div>
+            <h1 id="pageTitle">Rivas CF &bull; Panel de Rendimiento</h1>
+            <p id="pageSubtitle" class="text-muted">Gestión de plantilla, estadísticas oficiales y resultados del club</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button id="headerNewPlayerBtn" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Inscribir Jugador
+          </button>
+          <button id="headerNewMatchBtn" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Registrar Partido
+          </button>
+        </div>
+      </header>
+
+      <!-- SECCIÓN 1: DASHBOARD DE RIVAS CF -->
+      <section id="dashboardSection" class="content-section active">
+        <!-- Tarjetas KPI -->
+        <div class="kpi-grid">
+          <div class="kpi-card card-glow-green">
+            <div class="kpi-info">
+              <span class="kpi-label">Plantilla Oficial</span>
+              <h3 id="kpiPlayers" class="kpi-value">0</h3>
+              <span class="kpi-meta">Jugadores inscritos en Rivas CF</span>
+            </div>
+            <div class="kpi-icon icon-green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+            </div>
+          </div>
+
+          <div class="kpi-card card-glow-blue">
+            <div class="kpi-info">
+              <span class="kpi-label">Partidos Rivas CF</span>
+              <h3 id="kpiMatches" class="kpi-value">0</h3>
+              <span class="kpi-meta" id="kpiMatchesMeta">7V &bull; 2E &bull; 1D</span>
+            </div>
+            <div class="kpi-icon icon-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 6 12 12 16 14"></polygon></svg>
+            </div>
+          </div>
+
+          <div class="kpi-card card-glow-amber">
+            <div class="kpi-info">
+              <span class="kpi-label">Goles Marcados</span>
+              <h3 id="kpiGoals" class="kpi-value">0</h3>
+              <span class="kpi-meta">Anotaciones de Rivas CF</span>
+            </div>
+            <div class="kpi-icon icon-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg>
+            </div>
+          </div>
+
+          <div class="kpi-card card-glow-purple">
+            <div class="kpi-info">
+              <span class="kpi-label">Asistencias Totales</span>
+              <h3 id="kpiAssists" class="kpi-value">0</h3>
+              <span class="kpi-meta">Pases de gol del equipo</span>
+            </div>
+            <div class="kpi-icon icon-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fila de Gráfico y Tablas Rápidas -->
+        <div class="dashboard-grid">
+          <!-- Gráfico de Goleadores de Rivas CF -->
+          <div class="card chart-card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <h3>Goleadores de la Plantilla de Rivas CF</h3>
+                <small class="text-muted">Aportación ofensiva individual de los jugadores del club</small>
+              </div>
+              <span class="badge badge-accent">Gráfico en Vivo</span>
+            </div>
+            <div class="card-body">
+              <div class="canvas-wrapper">
+                <canvas id="goalsChart" width="600" height="260"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Goleadores del Club -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <h3>Máximos Goleadores de Rivas CF</h3>
+                <small class="text-muted">Líderes de goleo del equipo</small>
+              </div>
+              <button class="btn btn-sm btn-ghost view-all-link" data-tab="players">Ver plantilla &rarr;</button>
+            </div>
+            <div class="card-body p-0">
+              <div id="topScorersList" class="stat-list">
+                <!-- Generado por JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fila Secundaria: Últimos Resultados y Asistidores -->
+        <div class="dashboard-grid mt-4">
+          <!-- Últimos Partidos de Rivas CF -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <h3>Últimos Partidos de Rivas CF</h3>
+                <small class="text-muted">Marcadores recientes del club en la temporada</small>
+              </div>
+              <button class="btn btn-sm btn-ghost view-all-link" data-tab="matches">Ir a Partidos &rarr;</button>
+            </div>
+            <div class="card-body p-0">
+              <div id="recentMatchesList" class="matches-list-compact">
+                <!-- Generado por JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Asistidores de Rivas CF -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <h3>Máximos Asistidores de Rivas CF</h3>
+                <small class="text-muted">Mejores pasadores del equipo</small>
+              </div>
+              <button class="btn btn-sm btn-ghost view-all-link" data-tab="players">Ver plantilla &rarr;</button>
+            </div>
+            <div class="card-body p-0">
+              <div id="topAssistsList" class="stat-list">
+                <!-- Generado por JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2: PLANTILLA DE RIVAS CF (OPTIMIZADA) -->
+      <section id="playersSection" class="content-section">
+        <div class="card">
+          <!-- Chips de Resumen Rápido de la Plantilla -->
+          <div class="squad-summary-chips">
+            <div class="squad-chip chip-accent">
+              <span>👥 Plantilla Total:</span>
+              <strong id="chipTotalPlayers">0</strong>
+            </div>
+            <div class="squad-chip">
+              <span>🧤 Porteros:</span>
+              <strong id="chipGoalkeepers">0</strong>
+            </div>
+            <div class="squad-chip">
+              <span>🛡️ Defensas:</span>
+              <strong id="chipDefenders">0</strong>
+            </div>
+            <div class="squad-chip">
+              <span>⚙️ Centrocampistas:</span>
+              <strong id="chipMidfielders">0</strong>
+            </div>
+            <div class="squad-chip">
+              <span>⚡ Delanteros:</span>
+              <strong id="chipForwards">0</strong>
+            </div>
+            <div class="squad-chip chip-gold">
+              <span>🎖️ Capitán:</span>
+              <strong id="chipCaptain">Ninguno</strong>
+            </div>
+          </div>
+
+          <!-- Barra de Herramientas y Filtros -->
+          <div class="card-header filter-toolbar">
+            <div class="toolbar-left">
+              <div class="search-input-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="playerSearchInput" placeholder="Buscar jugador por nombre o país...">
+              </div>
+              <div class="filter-group">
+                <select id="playerPositionFilter" class="form-control-select">
+                  <option value="">Todas las Posiciones</option>
+                  <option value="Portero">Portero</option>
+                  <option value="Defensa">Defensa</option>
+                  <option value="Centrocampista">Centrocampista</option>
+                  <option value="Delantero">Delantero</option>
+                </select>
+                <label class="captain-checkbox-label">
+                  <input type="checkbox" id="playerCaptainOnly">
+                  <span>Solo Capitanes ©</span>
+                </label>
+                <select id="playerSortSelect" class="form-control-select">
+                  <option value="goals-desc">Ordenar: Más Goles</option>
+                  <option value="assists-desc">Ordenar: Más Asistencias</option>
+                  <option value="rating-desc">Ordenar: Mayor Rendimiento (OVR)</option>
+                  <option value="number-asc">Ordenar: Dorsal (#)</option>
+                  <option value="matches-desc">Ordenar: Más Partidos</option>
+                  <option value="name-asc">Ordenar: Nombre (A-Z)</option>
+                </select>
+              </div>
+            </div>
+            <div class="toolbar-right">
+              <button id="addPlayerBtn" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                + Inscribir Jugador
+              </button>
+            </div>
+          </div>
+
+          <!-- Indicador de Resultados -->
+          <div class="filter-status-bar">
+            <span id="playerCountLabel" class="text-muted">Mostrando 0 jugadores</span>
+            <button id="clearFiltersBtn" class="btn-text" style="display: none;">Limpiar filtros</button>
+          </div>
+
+          <!-- Tabla de la Plantilla -->
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="data-table" id="playersTable">
+                <thead>
+                  <tr>
+                    <th style="width: 65px;">Dorsal</th>
+                    <th>Jugador</th>
+                    <th>Posición</th>
+                    <th>Altura & País</th>
+                    <th class="text-center">PJ</th>
+                    <th class="text-center">Goles</th>
+                    <th class="text-center">Asist.</th>
+                    <th class="text-center" title="Valoración según rendimiento deportivo">Rendimiento</th>
+                    <th class="text-center" style="width: 150px;">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="playersTableBody">
+                  <!-- Llenado dinámicamente con JavaScript -->
+                </tbody>
+              </table>
+            </div>
+            <div id="noPlayersMessage" class="empty-state" style="display: none;">
+              <div class="empty-icon">⚽</div>
+              <h4>No se encontraron jugadores en la plantilla</h4>
+              <p class="text-muted">Prueba cambiando los filtros de búsqueda o inscribe un nuevo jugador en Rivas CF.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 3: FICHAS TÉCNICAS (SCOUTING CARDS DE RIVAS CF) -->
+      <section id="profilesSection" class="content-section">
+        <div class="card mb-4">
+          <div class="card-header filter-toolbar">
+            <div class="toolbar-left">
+              <div class="search-input-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="profileSearchInput" placeholder="Buscar ficha técnica por nombre o país...">
+              </div>
+              <div class="filter-group">
+                <select id="profilePositionFilter" class="form-control-select">
+                  <option value="">Todas las Posiciones</option>
+                  <option value="Portero">Portero</option>
+                  <option value="Defensa">Defensa</option>
+                  <option value="Centrocampista">Centrocampista</option>
+                  <option value="Delantero">Delantero</option>
+                </select>
+                <select id="profileSortSelect" class="form-control-select">
+                  <option value="rating-desc">Mayor Rendimiento (OVR)</option>
+                  <option value="value-desc">Mayor Valor de Mercado</option>
+                  <option value="height-desc">Mayor Altura</option>
+                  <option value="goals-desc">Más Goles</option>
+                  <option value="name-asc">Nombre (A-Z)</option>
+                </select>
+                <label class="captain-checkbox-label">
+                  <input type="checkbox" id="profileCaptainOnly">
+                  <span>Solo Capitanes ©</span>
+                </label>
+              </div>
+            </div>
+            <div class="toolbar-right">
+              <button id="addPlayerFromProfilesBtn" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Inscribir Jugador
+              </button>
+            </div>
+          </div>
+          <div class="filter-status-bar">
+            <span id="profileCountLabel" class="text-muted">Mostrando 0 fichas de jugadores</span>
+            <button id="clearProfileFiltersBtn" class="btn-text" style="display: none;">Limpiar filtros</button>
+          </div>
+        </div>
+
+        <!-- Grid de Cartas de Jugadores de Rivas CF -->
+        <div id="playerProfilesGrid" class="player-cards-grid">
+          <!-- Generado dinámicamente con JavaScript -->
+        </div>
+
+        <div id="noProfilesMessage" class="empty-state" style="display: none;">
+          <div class="empty-icon">📇</div>
+          <h4>No se encontraron fichas técnicas</h4>
+          <p class="text-muted">Ajusta los filtros o agrega un nuevo jugador a Rivas CF.</p>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 4: PARTIDOS DE RIVAS CF -->
+      <section id="matchesSection" class="content-section">
+        <div class="split-layout">
+          <!-- Formulario para Registrar Partido de Rivas CF -->
+          <div class="card split-form-card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <h3>Registrar Encuentro de Rivas CF</h3>
+                <small class="text-muted">Actualiza en vivo las estadísticas y la tabla de liga</small>
+              </div>
+            </div>
+            <div class="card-body">
+              <form id="matchForm">
+                <div class="form-group">
+                  <label for="matchDate">Fecha del Partido</label>
+                  <input type="date" id="matchDate" class="form-control" required>
+                </div>
+
+                <div class="match-teams-grid">
+                  <!-- Equipo Local -->
+                  <div class="team-input-box">
+                    <span class="team-box-tag">LOCAL</span>
+                    <div class="form-group mb-2">
+                      <label for="matchHomeTeam">Equipo</label>
+                      <input type="text" id="matchHomeTeam" class="form-control font-bold" placeholder="Ej. Rivas CF" list="teamsDataList" required value="Rivas CF">
+                    </div>
+                    <div class="form-group mb-0">
+                      <label for="matchHomeGoals">Goles</label>
+                      <input type="number" id="matchHomeGoals" class="form-control text-center text-lg font-bold" min="0" max="99" value="2" required>
+                    </div>
+                  </div>
+
+                  <div class="vs-divider">
+                    <span>VS</span>
+                  </div>
+
+                  <!-- Equipo Visitante -->
+                  <div class="team-input-box">
+                    <span class="team-box-tag">VISITANTE</span>
+                    <div class="form-group mb-2">
+                      <label for="matchAwayTeam">Equipo</label>
+                      <input type="text" id="matchAwayTeam" class="form-control font-bold" placeholder="Ej. CD Móstoles" list="teamsDataList" required>
+                    </div>
+                    <div class="form-group mb-0">
+                      <label for="matchAwayGoals">Goles</label>
+                      <input type="number" id="matchAwayGoals" class="form-control text-center text-lg font-bold" min="0" max="99" value="0" required>
+                    </div>
+                  </div>
+                </div>
+
+                <datalist id="teamsDataList"></datalist>
+
+                <div class="form-actions mt-4">
+                  <button type="submit" class="btn btn-primary btn-block">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                    Guardar Partido y Actualizar Liga
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Historial de Partidos de Rivas CF -->
+          <div class="card split-list-card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <h3>Historial de Encuentros de Rivas CF</h3>
+                <small id="matchesCountBadge" class="text-muted">0 partidos registrados</small>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div id="matchesContainer" class="matches-grid-container">
+                <!-- Generado por JavaScript -->
+              </div>
+              <div id="noMatchesMessage" class="empty-state" style="display: none;">
+                <div class="empty-icon">📅</div>
+                <h4>No hay partidos registrados</h4>
+                <p class="text-muted">Registra el primer partido de Rivas CF en el formulario.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 5: CLASIFICACIÓN DE LA LIGA -->
+      <section id="standingsSection" class="content-section">
+        <div class="card">
+          <div class="card-header standings-header">
+            <div>
+              <h3>Tabla General de Liga &bull; Rivas CF</h3>
+              <small class="text-muted">Rivas CF resaltado con su posición oficial y puntos acumulados</small>
+            </div>
+            <div class="standings-badges">
+              <span class="badge badge-success">3 pts Victoria</span>
+              <span class="badge badge-warning">1 pto Empate</span>
+              <span class="badge badge-neutral">0 pts Derrota</span>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="data-table standings-table" id="standingsTable">
+                <thead>
+                  <tr>
+                    <th style="width: 50px;" class="text-center">#</th>
+                    <th>Club / Equipo</th>
+                    <th class="text-center" title="Partidos Jugados">PJ</th>
+                    <th class="text-center" title="Partidos Ganados">PG</th>
+                    <th class="text-center" title="Partidos Empatados">PE</th>
+                    <th class="text-center" title="Partidos Perdidos">PP</th>
+                    <th class="text-center" title="Goles a Favor">GF</th>
+                    <th class="text-center" title="Goles en Contra">GC</th>
+                    <th class="text-center" title="Diferencia de Goles">DG</th>
+                    <th class="text-center pts-col" title="Puntos Totales">PTS</th>
+                  </tr>
+                </thead>
+                <tbody id="standingsTableBody">
+                  <!-- Llenado dinámicamente con JavaScript -->
+                </tbody>
+              </table>
+            </div>
+            <div id="noStandingsMessage" class="empty-state" style="display: none;">
+              <div class="empty-icon">🏆</div>
+              <h4>No hay datos de clasificación aún</h4>
+              <p class="text-muted">Registra partidos para que se genere la tabla automáticamente.</p>
+            </div>
+          </div>
+          <div class="standings-legend">
+            <strong>Glosario de Términos:</strong>
+            <span><strong>PJ:</strong> Partidos Jugados</span>
+            <span><strong>PG:</strong> Partidos Ganados</span>
+            <span><strong>PE:</strong> Partidos Empatados</span>
+            <span><strong>PP:</strong> Partidos Perdidos</span>
+            <span><strong>GF:</strong> Goles a Favor</span>
+            <span><strong>GC:</strong> Goles en Contra</span>
+            <span><strong>DG:</strong> Diferencia de Goles (GF - GC)</span>
+            <span><strong>PTS:</strong> Puntos Totales</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODAL: INSCRIBIR / EDITAR JUGADOR EN RIVAS CF -->
+  <div id="playerModal" class="modal-backdrop">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3 id="playerModalTitle">Inscribir Jugador en Rivas CF</h3>
+        <button type="button" class="btn-icon close-modal-btn" data-modal="playerModal" aria-label="Cerrar">&times;</button>
+      </div>
+      <form id="playerForm">
+        <div class="modal-body">
+          <input type="hidden" id="playerId">
+          <input type="hidden" id="playerPhotoData">
+          
+          <!-- Sección de Foto del Jugador -->
+          <div class="photo-uploader-box">
+            <div class="photo-preview-wrapper">
+              <div id="photoPreviewContainer" class="photo-preview-avatar">
+                <span id="photoPreviewFallback" class="avatar-initials">⚽</span>
+                <img id="photoPreviewImg" alt="Foto jugador" style="display: none;">
+              </div>
+            </div>
+            <div class="photo-uploader-controls">
+              <label class="form-label-bold">Fotografía Oficial del Jugador</label>
+              <div class="photo-btn-group">
+                <label for="playerPhotoFile" class="btn btn-sm btn-secondary" style="cursor: pointer;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                  Subir Foto (Archivo)
+                </label>
+                <input type="file" id="playerPhotoFile" accept="image/*" style="display: none;">
+                <button type="button" id="removePhotoBtn" class="btn btn-sm btn-outline-danger" style="display: none;">Quitar Foto</button>
+              </div>
+              <small class="text-muted">Si no subes foto, se creará un avatar deportivo oficial con sus iniciales y dorsal.</small>
+            </div>
+          </div>
+
+          <!-- Datos Básicos -->
+          <div class="form-row mt-3">
+            <div class="form-group col-half">
+              <label for="playerName">Nombre Completo <span class="required">*</span></label>
+              <input type="text" id="playerName" class="form-control" placeholder="Ej. Sergio Navas" required minlength="2">
+            </div>
+            <div class="form-group col-half">
+              <label for="playerTeam">Club / Equipo</label>
+              <input type="text" id="playerTeam" class="form-control" value="Rivas CF" readonly style="background: rgba(16, 185, 129, 0.12); border-color: var(--accent-green); color: var(--accent-green-bright); font-weight: bold;">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-third">
+              <label for="playerNumber">Dorsal (#) <span class="required">*</span></label>
+              <input type="number" id="playerNumber" class="form-control" placeholder="1-99" min="1" max="99" required>
+            </div>
+            <div class="form-group col-third">
+              <label for="playerPosition">Posición <span class="required">*</span></label>
+              <select id="playerPosition" class="form-control" required>
+                <option value="" disabled selected>Seleccionar...</option>
+                <option value="Portero">Portero</option>
+                <option value="Defensa">Defensa</option>
+                <option value="Centrocampista">Centrocampista</option>
+                <option value="Delantero">Delantero</option>
+              </select>
+            </div>
+            <div class="form-group col-third">
+              <label for="playerHeight">Altura (cm)</label>
+              <input type="number" id="playerHeight" class="form-control" placeholder="Ej. 182" min="140" max="220" value="180">
+            </div>
+          </div>
+
+          <!-- Atributos Físicos y Técnicos -->
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="playerNationality">Nacionalidad</label>
+              <input type="text" id="playerNationality" list="nationalitiesDataList" class="form-control" placeholder="Ej. España 🇪🇸, Colombia 🇨🇴" value="España 🇪🇸">
+            </div>
+            <div class="form-group col-half">
+              <label for="playerPreferredFoot">Pierna Hábil</label>
+              <select id="playerPreferredFoot" class="form-control">
+                <option value="Derecha">Derecha</option>
+                <option value="Izquierda">Izquierda</option>
+                <option value="Ambidiestra">Ambidiestra</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Capitán Toggle -->
+          <div class="captain-checkbox-container">
+            <label class="custom-switch-label">
+              <input type="checkbox" id="playerIsCaptain">
+              <span class="custom-switch-slider"></span>
+              <span class="custom-switch-text">🎖️ Designar como Capitán de Rivas CF</span>
+            </label>
+          </div>
+
+          <!-- Estadísticas de Temporada -->
+          <div class="form-row mt-2">
+            <div class="form-group col-third">
+              <label for="playerMatches">Partidos Jugados</label>
+              <input type="number" id="playerMatches" class="form-control" min="0" value="0">
+            </div>
+            <div class="form-group col-third">
+              <label for="playerGoals">Goles Marcados</label>
+              <input type="number" id="playerGoals" class="form-control" min="0" value="0">
+            </div>
+            <div class="form-group col-third">
+              <label for="playerAssists">Asistencias</label>
+              <input type="number" id="playerAssists" class="form-control" min="0" value="0">
+            </div>
+          </div>
+
+          <!-- Vista Previa de Rendimiento en Vivo -->
+          <div class="performance-live-card">
+            <div class="perf-live-header">
+              <span class="perf-live-title">⚡ Valoración Estimada según Rendimiento</span>
+              <span id="liveRatingBadge" class="badge badge-accent">72 OVR</span>
+            </div>
+            <div class="perf-live-details">
+              <span>Categoría: <strong id="liveCategoryText">Titular Confiable</strong></span>
+              <span>Valor de Mercado: <strong id="liveMarketValueText">€ 8.5M</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary close-modal-btn" data-modal="playerModal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="savePlayerBtn">Guardar en Plantilla de Rivas CF</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: FICHA TÉCNICA DETALLADA DEL JUGADOR -->
+  <div id="playerDetailModal" class="modal-backdrop">
+    <div class="modal-dialog modal-card-dialog">
+      <div class="modal-header">
+        <h3 id="playerDetailModalTitle">Ficha Técnica Oficial</h3>
+        <button type="button" class="btn-icon close-modal-btn" data-modal="playerDetailModal" aria-label="Cerrar">&times;</button>
+      </div>
+      <div class="modal-body p-0" id="playerDetailModalBody">
+        <!-- Generado dinámicamente -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary close-modal-btn" data-modal="playerDetailModal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="detailEditPlayerBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          Editar Jugador
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CONFIRMACIÓN GENERAL (ELIMINAR / RESETEAR) -->
+  <div id="confirmModal" class="modal-backdrop">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-header">
+        <h3 id="confirmModalTitle">Confirmar Acción</h3>
+        <button type="button" class="btn-icon close-modal-btn" data-modal="confirmModal" aria-label="Cerrar">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="confirm-icon-box" id="confirmModalIcon">⚠️</div>
+        <p id="confirmModalMessage" class="text-center">¿Estás seguro de continuar con esta acción?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary close-modal-btn" data-modal="confirmModal">Cancelar</button>
+        <button type="button" class="btn btn-danger" id="confirmModalActionBtn">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Datalist de Nacionalidades -->
+  <datalist id="nationalitiesDataList">
+    <option value="España 🇪🇸">
+    <option value="Colombia 🇨🇴">
+    <option value="Argentina 🇦🇷">
+    <option value="México 🇲🇽">
+    <option value="Uruguay 🇺🇾">
+    <option value="Chile 🇨🇱">
+    <option value="Brasil 🇧🇷">
+    <option value="Perú 🇵🇪">
+    <option value="Ecuador 🇪🇨">
+    <option value="Venezuela 🇻🇪">
+    <option value="Paraguay 🇵🇾">
+    <option value="Francia 🇫🇷">
+    <option value="Portugal 🇵🇹">
+    <option value="Italia 🇮🇹">
+  </datalist>
+
+  <!-- CONTENEDOR DE NOTIFICACIONES TOAST -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Rivas CF - Test Suite Automatizada</title>
+</head>
+<body>
+  <h1>Resultados de Pruebas: Rivas CF</h1>
+  <div id="testOutput"></div>
+
+  <!-- Contenedores mock necesarios para el test -->
+  <div style="display:none;">
+    <span id="kpiPlayers">0</span>
+    <span id="kpiMatches">0</span>
+    <span id="kpiGoals">0</span>
+    <span id="kpiAssists">0</span>
+    <span id="kpiMatchesMeta"></span>
+    <span id="chipTotalPlayers">0</span>
+    <span id="chipGoalkeepers">0</span>
+    <span id="chipDefenders">0</span>
+    <span id="chipMidfielders">0</span>
+    <span id="chipForwards">0</span>
+    <span id="chipCaptain"></span>
+    <div id="topScorersList"></div>
+    <div id="topAssistsList"></div>
+    <div id="recentMatchesList"></div>
+    <tbody id="playersTableBody"></tbody>
+    <div id="noPlayersMessage"></div>
+    <span id="playerCountLabel"></span>
+    <button id="clearFiltersBtn"></button>
+    <div id="playerProfilesGrid"></div>
+    <div id="noProfilesMessage"></div>
+    <span id="profileCountLabel"></span>
+    <button id="clearProfileFiltersBtn"></button>
+    <div id="matchesContainer"></div>
+    <div id="noMatchesMessage"></div>
+    <span id="matchesCountBadge"></span>
+    <tbody id="standingsTableBody"></tbody>
+    <div id="noStandingsMessage"></div>
+    <datalist id="teamsDataList"></datalist>
+    <select id="playerPositionFilter"></select>
+    <select id="profilePositionFilter"></select>
+    <input type="checkbox" id="playerCaptainOnly">
+    <input type="checkbox" id="profileCaptainOnly">
+    <select id="playerSortSelect"></select>
+    <select id="profileSortSelect"></select>
+    <input id="playerSearchInput">
+    <input id="profileSearchInput">
+    <canvas id="goalsChart"></canvas>
+    <div id="playerModal"></div>
+    <div id="playerDetailModal"></div>
+    <div id="playerDetailModalBody"></div>
+    <span id="playerDetailModalTitle"></span>
+    <div id="confirmModal"></div>
+    <span id="playerModalTitle"></span>
+    <span id="confirmModalTitle"></span>
+    <span id="confirmModalMessage"></span>
+    <span id="confirmModalIcon"></span>
+    <input id="playerId">
+    <input id="playerPhotoData">
+    <input type="file" id="playerPhotoFile">
+    <img id="photoPreviewImg">
+    <span id="photoPreviewFallback"></span>
+    <button id="removePhotoBtn"></button>
+    <input id="playerName">
+    <input id="playerNumber">
+    <select id="playerPosition"><option value="Delantero">Delantero</option></select>
+    <input id="playerHeight">
+    <input id="playerNationality">
+    <select id="playerPreferredFoot"><option value="Derecha">Derecha</option></select>
+    <input type="checkbox" id="playerIsCaptain">
+    <input id="playerTeam" value="Rivas CF">
+    <input id="playerMatches">
+    <input id="playerGoals">
+    <input id="playerAssists">
+    <span id="liveRatingBadge"></span>
+    <strong id="liveCategoryText"></strong>
+    <strong id="liveMarketValueText"></strong>
+    <input id="matchDate">
+    <input id="matchHomeTeam">
+    <input id="matchHomeGoals">
+    <input id="matchAwayTeam">
+    <input id="matchAwayGoals">
+    <button id="detailEditPlayerBtn"></button>
+    <div id="toastContainer"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    const results = [];
+    function assert(description, condition) {
+      results.push({ description, status: condition ? 'PASSED' : 'FAILED' });
+    }
+
+    try {
+      // 1. Inicialización de Rivas CF
+      StorageService.resetToDemo();
+      const players = StorageService.getPlayers();
+      const matches = StorageService.getMatches();
+
+      assert('Test 1: Inicialización con 20 jugadores en plantilla', players.length === 20);
+      assert('Test 2: Todos los jugadores pertenecen exclusivamente a Rivas CF', players.every(p => p.team === 'Rivas CF'));
+      assert('Test 3: Partidos oficiales de Rivas CF cargados', matches.length === 10);
+
+      // 2. Desglose de plantilla
+      const breakdown = StatsService.getSquadBreakdown(players);
+      assert('Test 4: Desglose plantilla - 2 Porteros', breakdown.goalkeepers === 2);
+      assert('Test 5: Desglose plantilla - 6 Defensas', breakdown.defenders === 6);
+      assert('Test 6: Desglose plantilla - 6 Centrocampistas', breakdown.midfielders === 6);
+      assert('Test 7: Desglose plantilla - 6 Delanteros', breakdown.forwards === 6);
+      assert('Test 8: Capitán oficial identificado', breakdown.captainLabel.includes('David Gómez'));
+
+      // 3. Estadísticas de Rivas CF en la temporada
+      const clubStats = StatsService.getClubStats(players, matches);
+      assert('Test 9: Partidos de Rivas CF contabilizados = 10', clubStats.totalMatches === 10);
+      assert('Test 10: Récord positivo de victorias (7V)', clubStats.won === 7);
+      assert('Test 11: Goles marcados por Rivas CF > 20', clubStats.totalGoals === 25);
+
+      // 4. Agregar jugador nuevo a Rivas CF
+      const nuevoJugador = {
+        id: 'r_nuevo_test',
+        name: 'Fichaje Estrella Rivas',
+        number: 77,
+        position: 'Delantero',
+        height: 183,
+        nationality: 'España 🇪🇸',
+        preferredFoot: 'Derecha',
+        isCaptain: false,
+        team: 'Rivas CF',
+        matches: 4,
+        goals: 3,
+        assists: 2,
+        photo: ''
+      };
+      players.unshift(nuevoJugador);
+      StorageService.savePlayers(players);
+      const afterAdd = StorageService.getPlayers();
+      assert('Test 12: Agregar jugador a Rivas CF incrementa plantilla a 21', afterAdd.length === 21);
+      assert('Test 13: Nuevo jugador encontrado en la plantilla', afterAdd.some(p => p.id === 'r_nuevo_test'));
+
+      // 5. Eliminar jugador de Rivas CF
+      const afterDelete = afterAdd.filter(p => p.id !== 'r_nuevo_test');
+      StorageService.savePlayers(afterDelete);
+      assert('Test 14: Eliminar jugador reduce plantilla de vuelta a 20', StorageService.getPlayers().length === 20);
+
+      // 6. Clasificación de liga y posición de Rivas CF
+      const standings = StatsService.calculateStandings(matches);
+      assert('Test 15: Tabla de liga incluye rivales', standings.length >= 10);
+      const rivasPos = standings.find(t => t.name === 'Rivas CF');
+      assert('Test 16: Rivas CF tiene 23 puntos en liga', rivasPos && rivasPos.points === 23);
+      assert('Test 17: Rivas CF es líder de la liga', standings[0].name === 'Rivas CF');
+
+      // Limpieza final
+      StorageService.resetToDemo();
+      assert('Test 18: Restaurar demo deja la plantilla limpia en 20 jugadores', StorageService.getPlayers().length === 20);
+
+    } catch (err) {
+      assert('ERROR FATAL EN TEST: ' + err.message, false);
+    }
+
+    const outputDiv = document.getElementById('testOutput');
+    outputDiv.innerHTML = results.map(r => `<div class="test-result ${r.status}">[${r.status}] ${r.description}</div>`).join('\n');
+  </script>
+</body>
+</html>
